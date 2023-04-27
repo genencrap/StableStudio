@@ -1,0 +1,32 @@
+{
+  "name": "stability",
+  "version": "0.0.0",
+  "license": "MIT",
+  "packageManager": "yarn@3.3.0",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "postinstall": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
+    "stablestudio-adapter": "yarn workspace @stability/stablestudio-adapter",
+    "stablestudio-adapter-stability": "yarn workspace @stability/stablestudio-adapter-stability",
+    "stablestudio-adapter-webgpu": "yarn workspace @stability/stablestudio-adapter-webgpu",
+    "stablestudio-adapter-webui": "yarn workspace @stability/stablestudio-adapter-webui",
+    "clean": "yarn workspaces foreach --interlaced --verbose --parallel run clean && rimraf node_modules",
+    "dev": "yarn workspaces foreach --interlaced --verbose --parallel run dev"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
+    "rimraf": "^3.0.2",
+    "yarn": "^1.22.19"
+  },
+  "lint-staged": {
+    "./packages/ui/**/*.{ts,tsx,js,jsx,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
+}

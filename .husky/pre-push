@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+. "$(dirname "$0")/common.sh"
+
+# Ensure the entire project still compiles
+blue=$(tput setaf 4)
+normal=$(tput sgr0)
+printf "%b" "${blue}Type checking... ${normal}"
+
+# TODO: re-enable after release
+# yarn stablestudio build:types
+
+# Run the lint-staged job in the root package.json
+yarn lint-staged
